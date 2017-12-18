@@ -119,17 +119,24 @@ class SharereportsController extends AppController
         }
     }
 
-    public function delete($id = null)
+    public function delete($reports_id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $report = $this->Reports->get($id);
-        if ($this->Reports->delete($report)) {
-            $this->Flash->success(__('The report has been deleted.'));
+        $report = $this->loadModel('reports')->find()
+            ->where(['Reports.id' => $reports_id])
+            ->contain(['users', 'reportcates'])
+            ->first();
+        $this->set('report', $report);
+        
+        $report = $this->loadModel('reports')->get($reports_id);
+        if ($this->loadModel('reports')->delete($report)) {
+            $this->Flash->success(__('レポートを削除しました。'));
         } else {
-            $this->Flash->error(__('The report could not be deleted. Please, try again.'));
+            $this->Flash->error(__('レポートを削除できませんでした。もう一度やり直してください。'));
         }
 
         return $this->redirect(['action' => 'index']);
+
+
     }
 
 }
