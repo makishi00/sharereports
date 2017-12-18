@@ -70,7 +70,7 @@ class ReportsTable extends Table
         $validator
             ->date('rp_date')
             ->requirePresence('rp_date', 'create')
-            ->notEmpty('rp_date');
+            ->notEmpty('rp_date', '作業日を入力してください。');
 
         $validator
             ->time('rp_time_from')
@@ -85,11 +85,7 @@ class ReportsTable extends Table
         $validator
             ->scalar('rp_content')
             ->requirePresence('rp_content', 'create')
-            ->notEmpty('rp_content');
-
-//        $validator
-//            ->dateTime('rp_created_at')
-//            ->requirePresence('rp_created_at', 'create');
+            ->notEmpty('rp_content', '作業内容を入力してください。');
 
         return $validator;
     }

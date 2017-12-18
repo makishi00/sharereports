@@ -4,6 +4,7 @@ $this->assign('title', '詳細ページ');
 
 <?php $this->start('contents'); ?>
     <hedder>
+        <a href="/sharereports/index">TOP</a>
         <h1>削除ページ</h1>
         <span><?= $userName ?></span>
         <a href="/auth/logout">ログアウト</a>

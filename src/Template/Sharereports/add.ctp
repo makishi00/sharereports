@@ -4,6 +4,7 @@ $this->assign('title', '新規登録');
 
 <?php $this->start('contents'); ?>
     <hedder>
+        <a href="/sharereports/index">TOP</a>
         <h1>新規登録ページ</h1>
         <span><?= $userName ?></span>
         <a href="/auth/logout">ログアウト</a>
@@ -18,6 +19,7 @@ $this->assign('title', '新規登録');
         } else {
             ?>
             <?= $this->Form->create($report); ?>
+            <?= $this->Form->error('rp_date'); ?>
             <table border="1">
                 <tr>
                     <th>作業日</th>
