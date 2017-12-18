@@ -67,7 +67,7 @@ class SharereportsController extends AppController
     public function add()
     {
         $reportModel = $this->loadModel('reports');
-        $report = $reportModel->newEntity();
+        $report = $reportModel->newEntity(['user_id' => 16]);
         $this->set('report', $report);
 
         $reportcates = $this->loadModel('reportcates')->find()->all();
@@ -78,10 +78,8 @@ class SharereportsController extends AppController
         $this->set('reportcateOption', $reportcateOptions);
 
         if ($this->request->is('post')) {
-            $addReportModel = $this->loadModel('reports');
-            $addReport = $addReportModel->newEntity(['user_id' => 16]);
-            $addReport = $addReportModel->patchEntity($addReport, $this->request->getData());
-            if ($addReportModel->save($addReport)) {
+            $report = $reportModel->patchEntity($report, $this->request->getData());
+            if ($reportModel->save($report)) {
                 $this->Flash->success(__('レポートを追加しました。'));
                 return $this->redirect(['action' => 'index']);
             }
@@ -91,7 +89,8 @@ class SharereportsController extends AppController
 
     public function edit($reports_id = null)
     {
-        $report = $this->loadModel('reports')->find()
+        $reportModel = $this->loadModel('reports');
+        $report = $reportModel->find()
             ->where(['Reports.id' => $reports_id])
             ->contain(['users', 'reportcates'])
             ->first();
@@ -105,12 +104,8 @@ class SharereportsController extends AppController
         $this->set('reportcateOption', $reportcateOptions);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $editReportModel = $this->loadModel('reports');
-            $editReport = $editReportModel->find()
-                ->where(['Reports.id' => $reports_id])
-                ->first();
-            $editReport = $editReportModel->patchEntity($editReport, $this->request->getData());
-            if ($editReportModel->save($editReport)) {
+            $report = $reportModel->patchEntity($report, $this->request->getData());
+            if ($reportModel->save($report)) {
                 $this->Flash->success(__('レポートを編集しました。'));
                 return $this->redirect(['action' => 'details/'.$reports_id]);
             }

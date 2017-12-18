@@ -68,8 +68,8 @@ class ReportsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->date('rp_date')
-            ->requirePresence('rp_date', 'create')
+            ->date('rp_date', '','作業日の入力が間違えています。')
+            ->requirePresence('rp_date', 'create', '作業日の入力が間違えています。')
             ->notEmpty('rp_date', '作業日を入力してください。');
 
         $validator
@@ -83,8 +83,8 @@ class ReportsTable extends Table
             ->notEmpty('rp_time_to');
 
         $validator
-            ->scalar('rp_content')
-            ->requirePresence('rp_content', 'create')
+            ->scalar('rp_content' ,'作業内容の入力が間違えています。')
+            ->requirePresence('rp_content', 'create', '作業内容の入力が間違えています。')
             ->notEmpty('rp_content', '作業内容を入力してください。');
 
         return $validator;

@@ -19,7 +19,6 @@ $this->assign('title', '新規登録');
         } else {
             ?>
             <?= $this->Form->create($report); ?>
-            <?= $this->Form->error('rp_date'); ?>
             <table border="1">
                 <tr>
                     <th>作業日</th>
@@ -32,6 +31,7 @@ $this->assign('title', '新規登録');
                                 'dateFormat' => 'YMD',
                                 'monthNames' => false,
                                 'empty' => array('year' => '年', 'month' => '月', 'day' => '日'),
+                                'inputContainerError' => '<div class="input {{type}}{{required}} error">{{content}}{{error}}</div>'
                             ]
                         );
                         ?>

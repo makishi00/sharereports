@@ -111,7 +111,7 @@ $this->assign('title', '編集ページ');
                             <?=
                             $this->Form->control("rp_content",
                                 [
-                                    'type' => 'text',
+                                    'type' => 'textarea',
                                     'label' => false,
                                 ]
                             );
