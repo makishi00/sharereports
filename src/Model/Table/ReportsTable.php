@@ -45,6 +45,14 @@ class ReportsTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
+
+        $this->addBehavior('Timestamp', [
+            'events' => [
+                'Model.beforeSave' => [
+                    'rp_created_at' => 'new'
+                ]
+            ]
+        ]);
     }
 
     /**
@@ -79,10 +87,9 @@ class ReportsTable extends Table
             ->requirePresence('rp_content', 'create')
             ->notEmpty('rp_content');
 
-        $validator
-            ->dateTime('rp_created_at')
-            ->requirePresence('rp_created_at', 'create')
-            ->notEmpty('rp_created_at');
+//        $validator
+//            ->dateTime('rp_created_at')
+//            ->requirePresence('rp_created_at', 'create');
 
         return $validator;
     }

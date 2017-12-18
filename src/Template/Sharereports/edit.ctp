@@ -11,6 +11,7 @@ $this->assign('title', '編集ページ');
 
     <div>
         <h2>レポートリスト</h2>
+        <?= $this->Flash->render() ?>
         <?php
         if($report === null) {
             echo '不正なアクセスです。';
@@ -35,27 +36,13 @@ $this->assign('title', '編集ページ');
                     <tr>
                         <th>報告者名</th>
                         <td>
-                            <?=
-                                $this->Form->control("Users.us_name",
-                                    [
-                                        'type' => 'text',
-                                        'label' => false,
-                                    ]
-                                );
-                            ?>
+                            <?= $report->Users['us_name'] ?>
                         </td>
                     </tr>
                     <tr>
                         <th>メールアドレス</th>
                         <td>
-                            <?=
-                                $this->Form->control("Users.us_mail",
-                                    [
-                                        'type' => 'text',
-                                        'label' => false,
-                                    ]
-                                );
-                            ?>
+                            <?= $report->Users['us_mail'] ?>
                         </td>
                     </tr>
                     <tr>
@@ -114,19 +101,6 @@ $this->assign('title', '編集ページ');
                                         'label' => false
                                     ]
                                 );
-                            $this -> Form -> input  ( "select3",
-                                [
-                                    "type" => "select",
-                                    "options" => [
-                                        "male" => "男",
-                                        "female" => "女",
-                                        "etc" => "その他"
-                                    ],
-                                    "value" => "female",
-                                    "multiple" => true,
-                                    "empty" => "Choose One"
-                                ]
-                            );
                             ?>
                         </td>
                     </tr>

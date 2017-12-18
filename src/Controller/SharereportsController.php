@@ -66,20 +66,28 @@ class SharereportsController extends AppController
 
     public function add()
     {
-        $report = $this->Reports->newEntity();
-        if ($this->request->is('post')) {
-            $report = $this->Reports->patchEntity($report, $this->request->getData());
-            if ($this->Reports->save($report)) {
-                $this->Flash->success(__('The report has been saved.'));
+        $reportModel = $this->loadModel('reports');
+        $report = $reportModel->newEntity();
+        $this->set('report', $report);
 
+        $reportcates = $this->loadModel('reportcates')->find()->all();
+        $reportcateOptions = [];
+        foreach ($reportcates as $key => $value) {
+            $reportcateOptions[$value->id] = $value->rc_name;
+        }
+        $this->set('reportcateOption', $reportcateOptions);
+
+        if ($this->request->is('post')) {
+            $addReportModel = $this->loadModel('reports');
+            $addReport = $addReportModel->newEntity(['user_id' => 16]);
+            $addReport = $addReportModel->patchEntity($addReport, $this->request->getData());
+            if ($addReportModel->save($addReport)) {
+                $this->Flash->success(__('レポートを追加しました。'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The report could not be saved. Please, try again.'));
+            debug($addReport->errors());
+            $this->Flash->error(__('レポートを追加できませんでした。 もう一度やり直してください'));
         }
-        $reportcates = $this->Reports->Reportcates->find('list', ['limit' => 200]);
-        $users = $this->Reports->Users->find('list', ['limit' => 200]);
-        $this->set(compact('report', 'reportcates', 'users'));
-        $this->set('_serialize', ['report']);
     }
 
     public function edit($reports_id = null)
@@ -89,15 +97,14 @@ class SharereportsController extends AppController
             ->contain(['users', 'reportcates'])
             ->first();
         $this->set('report', $report);
-        $reportcates = $this->loadModel('reportcates')->find()->all();
 
+        $reportcates = $this->loadModel('reportcates')->find()->all();
         $reportcateOptions = [];
         foreach ($reportcates as $key => $value) {
             $reportcateOptions[$value->id] = $value->rc_name;
         }
         $this->set('reportcateOption', $reportcateOptions);
 
-        // formきたら
         if ($this->request->is(['patch', 'post', 'put'])) {
             $editReportModel = $this->loadModel('reports');
             $editReport = $editReportModel->find()
@@ -105,10 +112,10 @@ class SharereportsController extends AppController
                 ->first();
             $editReport = $editReportModel->patchEntity($editReport, $this->request->getData());
             if ($editReportModel->save($editReport)) {
-                $this->Flash->success(__('編集完了。'));
+                $this->Flash->success(__('レポートを編集しました。'));
                 return $this->redirect(['action' => 'details/'.$reports_id]);
             }
-            $this->Flash->error(__('レポートを保存できませんでした。 もう一度やり直してください。'));
+            $this->Flash->error(__('レポートを編集できませんでした。 もう一度やり直してください。'));
         }
     }
 

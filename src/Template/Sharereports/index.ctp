@@ -10,7 +10,9 @@ $this->assign('title', 'TOP');
     </hedder>
 
     <div>
+        <?= $this->Flash->render() ?>
         <h2>レポートリスト</h2>
+        <a href="/sharereports/add">新規登録</a>
         <?php
         if($reportsState === null) {
             echo '情報が存在しません。';
