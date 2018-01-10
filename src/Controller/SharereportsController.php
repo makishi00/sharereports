@@ -35,16 +35,6 @@ class SharereportsController extends AppController
 
     public function index()
     {
-//        $reportsTbl = TableRegistry::get('reports');
-//        $report = $reportsTbl->newEntity();
-//        $report->rp_date = '2017-12-02';
-//        $report->rp_time_from = '10:00:00';
-//        $report->rp_time_to = '19:00:00';
-//        $report->rp_content = 'なんやこれ';
-//        $report->rp_created_at = '2017-12-02 00:00:00';
-//        $report->reportcate_id = 1;
-//        $report->user_id = 16;
-//        $reportsTbl->save($report);
         $this->loadComponent('Paginator');
         $this->set('reports', $this->paginate(
                 $this->loadModel('reports')->find()->contain('users')
@@ -67,7 +57,7 @@ class SharereportsController extends AppController
     public function add()
     {
         $reportModel = $this->loadModel('reports');
-        $report = $reportModel->newEntity(['user_id' => 16]);
+        $report = $reportModel->newEntity();
         $this->set('report', $report);
 
         $reportcates = $this->loadModel('reportcates')->find()->all();
@@ -78,7 +68,9 @@ class SharereportsController extends AppController
         $this->set('reportcateOption', $reportcateOptions);
 
         if ($this->request->is('post')) {
-            $report = $reportModel->patchEntity($report, $this->request->getData());
+            $getData = $this->request->getData();
+            $getData['user_id'] = $this->Auth->user('id');
+            $report = $reportModel->patchEntity($report, $getData);
             if ($reportModel->save($report)) {
                 $this->Flash->success(__('レポートを追加しました。'));
                 return $this->redirect(['action' => 'index']);
