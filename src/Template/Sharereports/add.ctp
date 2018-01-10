@@ -84,7 +84,6 @@ $this->assign('title', '新規登録');
                             [
                                 'type' => 'textarea',
                                 'label' => false,
-                                'value' => ''
                             ]
                         );
                         ?>

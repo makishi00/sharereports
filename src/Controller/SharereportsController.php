@@ -26,7 +26,6 @@ class SharereportsController extends AppController
             'paginator-templates']
     ];
 
-
     public function initialize()
     {
         parent::initialize();
@@ -121,8 +120,6 @@ class SharereportsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
-
-
     }
 
 }

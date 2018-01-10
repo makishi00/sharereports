@@ -27,7 +27,6 @@ $this->assign('title', 'TOP');
 
                 </tr>
                 <?php
-                //テーブル表示
                 foreach ($reports as $key => $vlue) {
 
                     echo "<tr>";
@@ -46,7 +45,6 @@ $this->assign('title', 'TOP');
                     echo "</tr>";
                 }
                 ?>
-
             </table>
             <?= $this->Paginator->first('<<first'); ?>
             <?= $this->Paginator->prev('<prev'); ?>
