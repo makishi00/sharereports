@@ -31,7 +31,6 @@ $this->assign('title', '新規登録');
                                 'dateFormat' => 'YMD',
                                 'monthNames' => false,
                                 'empty' => array('year' => '年', 'month' => '月', 'day' => '日'),
-                                'inputContainerError' => '<div class="input {{type}}{{required}} error">{{content}}{{error}}</div>'
                             ]
                         );
                         ?>
@@ -71,8 +70,6 @@ $this->assign('title', '新規登録');
                             [
                                 'type' => 'select',
                                 'options' => $reportcateOption,
-                                'id' => "id_name",
-                                'class' => 'class_name',
                                 'label' => false
                             ]
                         );
@@ -87,6 +84,7 @@ $this->assign('title', '新規登録');
                             [
                                 'type' => 'textarea',
                                 'label' => false,
+                                'value' => ''
                             ]
                         );
                         ?>
