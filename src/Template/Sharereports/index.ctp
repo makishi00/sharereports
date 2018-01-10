@@ -34,7 +34,7 @@ $this->assign('title', 'TOP');
                     echo $vlue->rp_date->i18nFormat('YYYY/MM/dd');
                     echo "</td>";
                     echo "<td>";
-                    mb_strlen($vlue->rp_content) > 10 ? print(substr($vlue->rp_content, 0, 10)) : print($vlue->rp_content);
+                    mb_strlen($vlue->rp_content) > 10 ? print(mb_substr($vlue->rp_content, 0, 10)) : print($vlue->rp_content);
                     echo "</td>";
                     echo "<td>";
                     echo $vlue->Users['us_name'];

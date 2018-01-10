@@ -29,8 +29,7 @@ $this->assign('title', '新規登録');
                                 'type' => 'date',
                                 'label' => false,
                                 'dateFormat' => 'YMD',
-                                'monthNames' => false,
-                                'empty' => array('year' => '年', 'month' => '月', 'day' => '日'),
+                                'monthNames' => false
                             ]
                         );
                         ?>

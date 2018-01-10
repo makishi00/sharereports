@@ -49,7 +49,7 @@ $this->assign('title', '詳細ページ');
                     </tr>
                     <tr>
                         <th>作業内容</th>
-                        <td><?= $report->rp_content ?></td>
+                        <td><?= nl2br($report->rp_content) ?></td>
                     </tr>
                     <tr>
                         <th>レポート登録日時</th>
