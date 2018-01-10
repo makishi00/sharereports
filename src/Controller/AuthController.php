@@ -7,7 +7,6 @@ use Cake\Network\Exception\ForbiddenException;
 use Cake\Network\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
 use Cake\ORM\TableRegistry;
-use Cake\Auth\DefaultPasswordHasher;
 
 class AuthController extends AppController
 {
@@ -15,7 +14,6 @@ class AuthController extends AppController
     {
         parent::initialize();
     }
-
 
     public function login()
     {
