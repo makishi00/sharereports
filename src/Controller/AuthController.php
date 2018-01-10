@@ -23,17 +23,6 @@ class AuthController extends AppController
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
 
-/**
-最初にコメントを外してユーザー登録をしてください。
-**/
-//        $usersTbl = TableRegistry::get('users');
-//        $user = $usersTbl->newEntity();
-//        $user->us_mail = 'architshin@websarva.com';
-//        $user->us_name = '齊藤新三';
-//        $user->us_password = (new DefaultPasswordHasher)->hash('hogehoge');
-//        $user->us_auth = 1;
-//        $usersTbl->save($user);
-
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {

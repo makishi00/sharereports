@@ -112,14 +112,16 @@ class SharereportsController extends AppController
             ->first();
         $this->set('report', $report);
 
-        $report = $this->loadModel('reports')->get($reports_id);
-        if ($this->loadModel('reports')->delete($report)) {
-            $this->Flash->success(__('レポートを削除しました。'));
-        } else {
-            $this->Flash->error(__('レポートを削除できませんでした。もう一度やり直してください。'));
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            debug($report = $this->loadModel('reports')->get($reports_id));
+            $report = $this->loadModel('reports')->get($reports_id);
+            if ($this->loadModel('reports')->delete($report)) {
+                $this->Flash->success(__('レポートを削除しました。'));
+            } else {
+                $this->Flash->error(__('レポートを削除できませんでした。もう一度やり直してください。'));
+            }
+            return $this->redirect(['action' => 'index']);
         }
-
-        return $this->redirect(['action' => 'index']);
     }
 
 }

@@ -40,7 +40,7 @@ $this->assign('title', 'TOP');
                     echo $vlue->Users['us_name'];
                     echo "</td>";
                     echo "<td>";
-                    echo "<button><a href='/sharereports/details/$vlue->id'>詳細を見る</a></button>";
+                    echo "<a href='/sharereports/details/$vlue->id'>詳細を見る</a>";
                     echo "</td>";
                     echo "</tr>";
                 }
