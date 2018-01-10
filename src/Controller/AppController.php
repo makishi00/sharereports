@@ -55,8 +55,7 @@ class AppController extends Controller
                 'controller' => 'Auth',
                 'action' => 'login'
             ],
-
-            'unauthorizedRedirect' => $this->referer() // 未認証時、元のページを返します。
+            'authError' => ''
         ]);
 
         /*
